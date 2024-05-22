@@ -1,19 +1,25 @@
-package edu.rit.Unit5;
+package edu.rit.Unit5.generics;
 
-public class LinkedQueue implements Queue {
+public class GenericLinkedQueue<T> implements GenericQueue<T> {
 
-    private Node head;
-    private Node tail;
+    private GenericNode<T> head;
+    private GenericNode<T> tail;
     private int size;
 
+    public GenericLinkedQueue() {
+        this.size = 0;
+        this.head = null;
+        this.tail = null;
+    }
+
     @Override
-    public void enqueue(String value) {
-        Node node = new Node(value);
+    public void enqueue(T value) {
+        GenericNode<T> node = new GenericNode<T>(value);
         if (this.size == 0) {
             this.head = node;
             this.tail = node;
         } else {
-            Node oldTail = this.tail;
+            GenericNode<T> oldTail = this.tail;
             oldTail.setNextNode(node);
             this.tail = node;
         }
@@ -22,10 +28,10 @@ public class LinkedQueue implements Queue {
     }
 
     @Override
-    public String dequeue() {
+    public T dequeue() {
         if (size == 0)
             return null;
-        String value = this.head.getValue();
+        T value = this.head.getValue();
         this.head = this.head.getNextNode();
         if (this.head == null) {
             this.tail = null;
@@ -39,38 +45,34 @@ public class LinkedQueue implements Queue {
         return this.size;
     }
 
-    public Node getHead() {
+    public GenericNode<T> getHead() {
         return head;
     }
 
-    public void setHead(Node head) {
+    public void setHead(GenericNode<T> head) {
         this.head = head;
     }
 
-    public Node getTail() {
+    public GenericNode<T> getTail() {
         return tail;
     }
 
-    public void setTail(Node tail) {
+    public void setTail(GenericNode<T> tail) {
         this.tail = tail;
     }
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return "Queue[" + this.size() + ", " + this.head + "]";
     }
 
     public static void main(String[] args) {
-        LinkedQueue queue = new LinkedQueue();
+        GenericLinkedQueue<String> queue = new GenericLinkedQueue<>();
         queue.enqueue("A");
         queue.enqueue("B");
         queue.enqueue("C");
-        queue.dequeue();
-        queue.dequeue();
         queue.enqueue("D");
-        queue.dequeue();
-        queue.dequeue();
+
         System.out.println(queue);
     }
 }

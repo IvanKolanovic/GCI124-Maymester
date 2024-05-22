@@ -1,4 +1,4 @@
-package edu.rit.Unit5;
+package edu.rit.Unit5.queues;
 
 public interface Queue {
     void enqueue(String value);
